@@ -1,0 +1,22 @@
+---
+# defaults file for ansible-landscape-db
+landscape_app_group: 'landscape_app'
+
+landscape_app_interface: 'enp0s8'
+
+landscape_db_master: 'node0'
+
+landscape_db_replication_group: 'landscape_db'
+
+landscape_db_replication_interface: 'enp0s8'
+
+landscape_db_replication_user: 'repluser'
+
+# Landscape version 17.03 only works with 9.5
+landscape_db_postgresql_version: 9.5
+
+landscape_db_superuser_info:
+  name: 'landscape_superuser'
+  password: 'landscape'
+
+landscape_replicated_db: false
