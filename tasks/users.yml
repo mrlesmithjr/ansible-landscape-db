@@ -20,3 +20,23 @@
   when: >
         landscape_replicated_db and
         inventory_hostname == landscape_db_master
+
+- name: users | Assigning Landscape User Permissions
+  postgresql_user:
+    name: "{{ landscape_app_user_info['name'] }}"
+    password: "{{ landscape_app_user_info['password'] }}"
+    db: "landscape"
+  become: true
+  become_user: "postgres"
+  when: not landscape_replicated_db
+
+- name: users | Assigning Landscape User Permissions
+  postgresql_user:
+    name: "{{ landscape_app_user_info['name'] }}"
+    password: "{{ landscape_app_user_info['password'] }}"
+    db: "landscape"
+  become: true
+  become_user: "postgres"
+  when: >
+        landscape_replicated_db and
+        inventory_hostname == landscape_db_master
