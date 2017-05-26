@@ -5,6 +5,15 @@
 
 - hosts: landscape_db
   vars:
+    create_users: []
+      # - user: 'test'
+      #   comment: 'Test user'
+      #   generate_keys: true
+      #   pass: 'test'
+      #   preseed_user: false
+      #   state: 'present'
+      #   sudo: false
+      #   system_account: false
     landscape_db_master: "{{ groups[postgresql_replication_group][0] }}"
     landscape_db_postgresql_version: '{{ postgresql_version }}'
     landscape_replicated_db: true
@@ -24,6 +33,8 @@
     postgresql_version: 9.5
     pri_domain_name: 'test.vagrant.local'
   roles:
+    - role: ansible-users
+      when: create_users is defined
     - role: ansible-postgresql
     - role: ansible-landscape-db
       tags:
